@@ -6,6 +6,9 @@ import Layout from "../components/layout";
 import getFirebase from "../lib/firebase";
 import { useAuth } from "../lib/hooks/context";
 
+
+
+
 export default function SignUp() {
     const emailRef = useRef(null)
     const pass1Ref = useRef(null)
@@ -20,8 +23,6 @@ export default function SignUp() {
             router.push('/')
 
     }, [context, router])
-
-
 
     const onClickHandler = async (e: any) => {
         e.preventDefault()
@@ -43,6 +44,14 @@ export default function SignUp() {
                     console.log(err.code)
                     console.log(err.message)
                 })
+
+            getAuth(instance).currentUser?.getIdToken(true)
+            .then(token => {
+                console.log('Token...', token)
+            })
+            .catch(err => {
+                console.log('Token', err)
+            })
         } catch (e) {
             console.log(e)
         }

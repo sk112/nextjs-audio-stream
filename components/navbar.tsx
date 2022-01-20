@@ -21,6 +21,7 @@ export default function NavBar({ auth }: { auth: boolean }) {
             .then(() => {
                 console.log('Sign out success')
                 router.push('/')
+                
             })
             .catch(err => {
                 console.log(err.code)
@@ -98,7 +99,7 @@ function Link({ path, content }: { path: string, content: ReactNode }) {
     )
 }
 
-function Item({ children }) {
+function Item({ children } : { children : ReactNode}) {
 
     return (
         <div>

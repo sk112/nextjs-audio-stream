@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/hooks/context.tsx", "lib/hooks/context.tsx", "lib/hooks/auth.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/hooks/context.jsx", "lib/hooks/context.jsx", "lib/hooks/auth.ts", "pages/index.jsx"],
   "exclude": ["node_modules"]
 }

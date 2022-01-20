@@ -4,12 +4,14 @@ import { contextType } from "../../types/types";
 import useFirebaseAuth from "./auth";
 
 
-const AuthUserContext = createContext<contextType | null>({
+const AuthUserContext = createContext({
     author: null,
-    loading: true
+    loading: true,
+    token: null,
+    socket: null
 })
 
-export function AuthUserProvider({ children }: { children: React.ReactNode}) {
+export function AuthUserProvider({ children }) {
     const auth = useFirebaseAuth()
 
     return (
