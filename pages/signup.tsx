@@ -27,7 +27,7 @@ export default function SignUp() {
             console.log(instance, getAuth(instance).currentUser)
             try {
                 const e: string = email
-                // const user = await reateUserWithEmailAndPassword(getAuth(instance), e, pass1)
+                
                 createUserWithEmailAndPassword(getAuth(instance), e, pass1)
                     .then(user => {
                         console.log(user)

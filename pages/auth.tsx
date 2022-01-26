@@ -1,11 +1,14 @@
 import { useRouter } from "next/router"
 import { useCallback, useEffect } from "react"
 import { Button, FlexContainer } from "../components/components"
+import { useAuth } from "../lib/hooks/context"
 import Layout from './../components/layout'
 
 export default function Auth() {
 
     const router = useRouter()
+    const context = useAuth()
+
     const handlerSignup = useCallback((event: any) => {
         router.push('/signup')
     }, [router])
@@ -15,9 +18,13 @@ export default function Auth() {
     }, [router])
 
     useEffect(() => {
+
+        if(context.author)
+            router.push('/')
+
         router.prefetch('/signup')
         router.prefetch('/login')
-    }, [router])
+    }, [context.author, router])
 
     return (
         <Layout>

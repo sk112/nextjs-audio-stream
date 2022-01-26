@@ -8,7 +8,8 @@ const AuthUserContext = createContext({
     author: null,
     loading: true,
     token: null,
-    socket: null
+    socket: null,
+    peer: null
 })
 
 export function AuthUserProvider({ children }) {
