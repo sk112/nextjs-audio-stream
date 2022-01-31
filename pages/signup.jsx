@@ -14,7 +14,7 @@ export default function SignUp() {
 
     const [error, setError] = useState(false);
 
-    const onClickHandler = async (e: any) => {
+    const onClickHandler = async (e) => {
         e.preventDefault()
 
         const email = emailRef.current.value
@@ -26,7 +26,7 @@ export default function SignUp() {
             let instance = getFirebase()
             console.log(instance, getAuth(instance).currentUser)
             try {
-                const e: string = email
+                const e = email
                 
                 createUserWithEmailAndPassword(getAuth(instance), e, pass1)
                     .then(user => {

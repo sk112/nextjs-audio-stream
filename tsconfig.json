@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/hooks/context.jsx", "lib/hooks/context.jsx", "lib/hooks/auth.ts", "pages/index.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/hooks/context.jsx", "lib/hooks/context.jsx", "lib/hooks/auth.ts", "pages/index.jsx", "pages/join-create.jsx", "pages/signup.jsx", "pages/signup.jsx", "pages/login.jsx", "pages/auth.jsx"],
   "exclude": ["node_modules"]
 }

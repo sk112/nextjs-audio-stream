@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../lib/hooks/context'
 import { FlexContainer } from './components'
@@ -16,10 +17,11 @@ export default function Layout({ children, auth }) {
     return (
         <div className='flex flex-col h-screen bg-red-500'>
             {
-                auth?
-                <NavBar auth={loggedIn} btns={false}/>:
-                <NavBar auth={loggedIn} btns={true}/>
+                auth ?
+                    <NavBar auth={loggedIn} btns={false} /> :
+                    <NavBar auth={loggedIn} btns={true} />
             }
+            
             <FlexContainer>
                 {children}
             </FlexContainer>

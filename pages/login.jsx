@@ -24,7 +24,7 @@ export default function SignUp() {
 
     }, [context, router])
 
-    const onClickHandler = async (e: any) => {
+    const onClickHandler = async (e) => {
         e.preventDefault()
 
         const email = emailRef.current.value
@@ -33,7 +33,7 @@ export default function SignUp() {
         let instance = getFirebase()
         console.log(instance, getAuth(instance).currentUser)
         try {
-            const e: string = email
+            const e = email
             // const user = await reateUserWithEmailAndPassword(getAuth(instance), e, pass1)
             signInWithEmailAndPassword(getAuth(instance), e, pass1)
                 .then(user => {

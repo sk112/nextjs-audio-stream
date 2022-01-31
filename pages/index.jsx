@@ -23,13 +23,13 @@ export default function App() {
         e.preventDefault()
 
         context.socket.emit('ping', 'test123')
+        router.push('/join-create')
     }
 
     return (
         <Layout>
             Hello World!
-
-            <Button text="Ping" onClickCallback={onClickHandler} />
+            <Button text="Go To Rooms" onClickCallback={onClickHandler} />
         </Layout>
     )
 }

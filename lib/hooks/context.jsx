@@ -1,6 +1,5 @@
 
 import React, { createContext, ReactNode, useContext } from "react";
-import { contextType } from "../../types/types";
 import useFirebaseAuth from "./auth";
 
 
@@ -9,7 +8,6 @@ const AuthUserContext = createContext({
     loading: true,
     token: null,
     socket: null,
-    peer: null
 })
 
 export function AuthUserProvider({ children }) {
