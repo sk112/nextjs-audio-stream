@@ -28,7 +28,7 @@ const Home = () => {
 
         <Container itemsat='end' extras='pb-10 border-b-2 border-gray-300/50'>
           
-          <InputField inputRef={inputRef} placeholder={'Meeting ID'} />
+          <InputField inputRef={inputRef} placeholder={'Meeting ID'} extras="mr-5 w-5/6"/>
           <Button  text="Join" onClickCallback={onClickHandler} extras='md:w-1/4 w-auto'/>
         </Container>
         <Container itemsat='end' extras='pt-10'>

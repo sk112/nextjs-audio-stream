@@ -61,8 +61,8 @@ export default function SignUp() {
         <Layout auth>
             <FlexContainer>
                 <Container itemsat="center" extras='flex-col'>
-                    <InputField inputRef={emailRef} placeholder="Email Address" />
-                    <InputField inputRef={pass1Ref} placeholder="Password" />
+                    <InputField inputRef={emailRef} placeholder="Email Address" extras="w-5/6" />
+                    <InputField inputRef={pass1Ref} placeholder="Password" extras="w-5/6" />
                 </Container>
                 <Container itemsat="center">
                     <Button text='SignIn' onClickCallback={onClickHandler} extras='mt-2' />

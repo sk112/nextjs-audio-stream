@@ -23,7 +23,7 @@ export default function Home() {
             })
         }
 
-    }, [context])
+    }, [context, router])
 
     return (<Layout>
         <Container>

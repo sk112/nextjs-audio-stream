@@ -15,8 +15,6 @@ export default function App() {
         if (!context?.loading && !context?.author)
             router.push('/auth')
 
-        
-
     }, [context, router])
 
     const onClickHandler = (e) => {

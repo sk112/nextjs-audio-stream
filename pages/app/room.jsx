@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { Button, Container, FlexContainer, InputField } from "../../components/components";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Button, FlexContainer, InputField } from "../../components/components";
 import Layout from "../../components/layout";
+import { useAuth } from "../../lib/hooks/context";
 
 export default function Room() {
     const router = useRouter()
@@ -45,7 +47,7 @@ export default function Room() {
                         setLocPeers(prev => {
                             prev[d['spid']] = d['fid']
 
-                            return { ...prev }
+                            return {...prev}
                         })
                     })
                 })
@@ -97,7 +99,7 @@ export default function Room() {
                 }
             })
         }
-    }, [context, peerid, router.query.room])
+    }, [context, peerid])
 
     return (
         <Layout>
@@ -106,7 +108,7 @@ export default function Room() {
                 <div className="h-full w-full grid grid-cols-2 grid-rows-1 gap-3">
                     {contacts !== undefined ?
                         Object.keys(contacts).map((userid, index) => {
-                            return <Contact index={index} id={userid} peerid={contacts[userid]} peerObj={peerObj} selfpid={peerid} setLocPeers={setLocPeers} fid={locPeers[contacts[userid]]} userid={context.author.author.email} />
+                            return <Contact index={index} id={userid} peerid={contacts[userid]} peerObj={peerObj} selfpid={peerid} setLocPeers={setLocPeers} fid={locPeers[contacts[userid]]} userid={context.author.author.email}/>
                         }) :
                         <></>
                     }
@@ -139,10 +141,10 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
             peer.on('open', (id) => {
                 console.log('LOC PEER: Local Peer (onopen event)', id, ' connected!!')
                 setLocPeerid(id)
-                setLocPeers(prev => {
+                setLocPeers(prev =>{
                     prev[id] = null
 
-                    return { ...prev }
+                    return {...prev}
                 })
             })
 
@@ -169,11 +171,11 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
         if (pConn === null && locPeerid !== null) {
             pConnCreateCallback()
         }
-    }, [pConn, locPeerid, pConnCreateCallback])
+    }, [pConn, locPeerid])
 
     useEffect(() => {
-        if (fid !== null && locPeerObj !== null) {
-            console.log('LOC PEER: (effect(fid)): ', fid, ' at ', locPeerid)
+        if(fid !== null && locPeerObj !== null){
+            console.log('LOC PEER: (effect(fid)): ', fid , ' at ', locPeerid)
 
             let conn = locPeerObj.connect(fid, {
                 metadata: {
@@ -184,7 +186,7 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
                 conn.on('data', data => {
                     console.log('PEER CONTACT CONNECT: (ondata event): ', data, conn.metadata)
                 })
-
+    
                 conn.send({
                     'type': 'CONNECT',
                     'pid': peerid,
@@ -196,7 +198,7 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
 
             setFPid(fid)
         }
-    }, [fid, locPeerObj, locPeerid, peerid, selfpid, userid])
+    }, [fid])
 
     const pConnCreateCallback = useCallback(() => {
 
@@ -221,7 +223,7 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
         conn.on('error', err => {
             console.log('PEER CONTACT CONNECT: (onerror): ', err)
         })
-    }, [peerObj, peerid, userid, selfpid, locPeerid])
+    }, [peerObj, peerid, locPeerid])
 
     const onClickCallback = useCallback((event) => {
         event.preventDefault()
@@ -233,7 +235,7 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
             'msg': 'Hello, ' + data
         })
 
-    }, [pConn, locPeerid, selfpid])
+    }, [pConn,locPeerid, selfpid])
 
 
 
@@ -241,24 +243,20 @@ function Contact({ index, id, peerid, peerObj, selfpid, setLocPeers, fid, userid
      * TODO: min width containers.
      */
     return (
-        <Layout>
-            <Container>
-                <div key={index} className="flex flex-col border-4 border-slate-400 m-2 min-w-fit">
-                    <div className="flex flex-col h-20 bg-gray-400 justify-center items-center min-w-fit">
-                        {id}
-                        <small className="font-thin">{peerid}</small>
-                        <small className="font-thin">{locPeerid}</small>
-                    </div>
-                    <div className="flex-auto bg-red-500">
+        <div key={index} className="flex flex-col border-4 border-slate-400 m-2 min-w-fit">
+            <div className="flex flex-col h-20 bg-gray-400 justify-center items-center min-w-fit">
+                {id}
+                <small className="font-thin">{peerid}</small>
+                <small className="font-thin">{locPeerid}</small>
+            </div>
+            <div className="flex-auto bg-red-500">
 
-                    </div>
-                    <div className="flex flex-row h-auto w-full">
-                        <InputField inputRef={inputRef} placeholder="Message here!" extras="w-5/6" />
-                        <Button text={"Send"} onClickCallback={onClickCallback} extras={"w-1/6 m-1"} />
-                    </div>
-                </div>
-            </Container>
-        </Layout>
+            </div>
+            <div className="flex flex-row h-auto w-full">
+                <InputField inputRef={inputRef} placeholder="Message here!" extras="w-5/6" />
+                <Button text={"Send"} onClickCallback={onClickCallback} extras={"w-1/6 m-1"} />
+            </div>
+        </div>
     )
 }
 
